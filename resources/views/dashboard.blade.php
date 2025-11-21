@@ -82,6 +82,21 @@
                                 <p class="mt-1 text-xs text-red-600"> {{ $message }} </p>
                             @enderror
                         </div>
+                        <!-- NEW: Course Dropdown -->
+                        <div class="md:col-span-1">
+                            <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Course</label>
+                            <select name="course_id" required class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100">
+                                <option value="">Select a course</option>
+                                @foreach($courses as $course)
+                                    <option value="{{ $course->id }}" {{ old('course_id') == $course->id ? 'selected' : '' }}>
+                                        {{ $course->course_name }} ({{ $course->description }})
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('course_id')
+                                <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
+                            @enderror
+                        </div>
                         <div>
                             <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Address</label>
                             <input type="text" name="address" value="{{ old('address') }}" placeholder="Enter address"  required class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100">
@@ -135,7 +150,7 @@
                                         <td class="px-4 py-8 text-center text-sm text-neutral-500 dark:text-neutral-400" colspan="6">
                                             No students found. Add your first student above!
                                         </td>
-                                    </tr>                                    
+                                    </tr>                                       
                                 @endforelse
                             </tbody>
                         </table>
